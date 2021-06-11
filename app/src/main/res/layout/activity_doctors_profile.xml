@@ -9,176 +9,137 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/background"
-        tools:context=".DoctorsProfile"
-        android:paddingBottom="150dp">
+        tools:context=".DoctorsProfile">
 
-        <de.hdodenhof.circleimageview.CircleImageView
-            android:id="@+id/imageview1"
-            android:layout_width="150dp"
-            android:layout_height="150dp"
-            android:layout_alignParentTop="true"
-            android:layout_marginTop="32dp"
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            app:cardCornerRadius="15dp"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.436"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            tools:ignore="MissingClass" />
+            app:layout_constraintTop_toTopOf="parent">
 
-        <TextView
-            android:id="@+id/textView5"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="116dp"
-            android:layout_marginEnd="68dp"
-            android:layout_marginRight="68dp"
-            android:fontFamily="sans-serif"
-            android:text="NAME:"
-            android:textColor="@color/white"
-            android:textColorHint="@color/white"
-            android:textSize="18sp"
-            android:textStyle="bold|italic"
-            android:typeface="normal"
-            app:layout_constraintEnd_toStartOf="@+id/buttonupload"
-            app:layout_constraintTop_toBottomOf="@+id/buttonupload" />
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@color/background"
+                android:paddingBottom="150dp">
 
-        <TextView
-            android:id="@+id/textView6"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="32dp"
-            android:fontFamily="sans-serif"
-            android:text="EMAIL:"
-            android:textColor="@color/white"
-            android:textColorHint="@color/white"
-            android:textSize="18sp"
-            android:textStyle="bold|italic"
-            android:typeface="normal"
-            app:layout_constraintEnd_toEndOf="@+id/textView5"
-            app:layout_constraintStart_toStartOf="@+id/textView5"
-            app:layout_constraintTop_toBottomOf="@+id/textView5" />
-
-        <TextView
-            android:id="@+id/textView7"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="32dp"
-            android:fontFamily="sans-serif"
-            android:text="PHONE NO:"
-            android:textColor="@color/white"
-            android:textColorHint="@color/white"
-            android:textSize="18sp"
-            android:textStyle="bold|italic"
-            android:typeface="normal"
-            app:layout_constraintEnd_toEndOf="@+id/textView6"
-            app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toStartOf="@+id/textView6"
-            app:layout_constraintTop_toBottomOf="@+id/textView6" />
-
-        <TextView
-            android:id="@+id/textView9"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="32dp"
-            android:fontFamily="sans-serif"
-            android:text="LOCATION:"
-            android:textColor="@color/white"
-            android:textColorHint="@color/white"
-            android:textSize="18sp"
-            android:textStyle="bold|italic"
-            android:typeface="normal"
-            app:layout_constraintEnd_toEndOf="@+id/textView7"
-            app:layout_constraintHorizontal_bias="0.333"
-            app:layout_constraintStart_toStartOf="@+id/textView7"
-            app:layout_constraintTop_toBottomOf="@+id/textView7" />
-
-        <TextView
-            android:id="@+id/textView10"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="32dp"
-            android:text="DESCRIPTION:"
-            android:textColor="@color/white"
-            android:textSize="18sp"
-            android:textStyle="bold"
-            app:layout_constraintEnd_toEndOf="@+id/textView9"
-            app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toStartOf="@+id/textView9"
-            app:layout_constraintTop_toBottomOf="@+id/textView9" />
-
-        <TextView
-            android:id="@+id/textViewDocName"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textSize="18sp"
-            android:layout_marginStart="20dp"
-            android:layout_marginLeft="20dp"
-            app:layout_constraintStart_toEndOf="@+id/textView5"
-            app:layout_constraintTop_toTopOf="@+id/textView5" />
-
-        <TextView
-            android:id="@+id/textViewDocEmail"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textSize="18sp"
-            android:layout_marginTop="40dp"
-            app:layout_constraintStart_toStartOf="@+id/textViewDocName"
-            app:layout_constraintTop_toBottomOf="@+id/textViewDocName" />
-
-        <TextView
-            android:id="@+id/textViewDocPhoneNo"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textSize="18sp"
-            android:layout_marginStart="20dp"
-            android:layout_marginLeft="20dp"
-            app:layout_constraintStart_toEndOf="@+id/textView7"
-            app:layout_constraintTop_toTopOf="@+id/textView7" />
-
-        <TextView
-            android:id="@+id/textViewDocLocation"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textSize="18sp"
-            android:layout_marginStart="20dp"
-            android:layout_marginLeft="20dp"
-            app:layout_constraintEnd_toEndOf="@+id/textViewDocPhoneNo"
-            app:layout_constraintStart_toEndOf="@+id/textView9"
-            app:layout_constraintTop_toTopOf="@+id/textView9" />
-
-        <TextView
-            android:id="@+id/textViewDocDesc"
-            android:layout_width="200dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="20dp"
-            android:layout_marginLeft="20dp"
-            android:scrollHorizontally="false"
-            android:textSize="18sp"
-            app:layout_constraintStart_toEndOf="@+id/textView10"
-            app:layout_constraintTop_toTopOf="@+id/textView10" />
-
-        <Button
-            android:id="@+id/buttonupload"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:background="@drawable/buttonbackground"
-            android:text="Upload"
-            app:backgroundTint="@color/button_background"
-            app:layout_constraintEnd_toEndOf="@+id/imageview1"
-            app:layout_constraintStart_toStartOf="@+id/imageview1"
-            app:layout_constraintTop_toBottomOf="@+id/imageview1" />
-
-        <ProgressBar
-            android:id="@+id/progressBarupload"
-            style="?android:attr/progressBarStyle"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            app:layout_constraintEnd_toEndOf="@+id/buttonupload"
-            app:layout_constraintStart_toStartOf="@+id/buttonupload"
-            app:layout_constraintTop_toBottomOf="@+id/buttonupload" />
+                <de.hdodenhof.circleimageview.CircleImageView
+                    android:id="@+id/imageviewdprofile"
+                    android:layout_width="150dp"
+                    android:layout_height="150dp"
+                    android:layout_alignParentTop="true"
+                    android:layout_marginTop="32dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.436"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    tools:ignore="MissingClass" />
 
 
+                <Button
+                    android:id="@+id/buttonupload"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:background="@drawable/buttonbackground"
+                    android:text="Upload"
+                    android:textSize="16sp"
+                    app:backgroundTint="@color/button_background"
+                    app:layout_constraintEnd_toEndOf="@+id/imageviewdprofile"
+                    app:layout_constraintStart_toStartOf="@+id/imageviewdprofile"
+                    app:layout_constraintTop_toBottomOf="@+id/imageviewdprofile" />
+
+                <EditText
+                    android:id="@+id/dprofilename"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:ems="10"
+                    android:inputType="textPersonName"
+                    android:text="Name"
+                    android:textColor="@color/black"
+                    android:textSize="16sp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/buttonupload"
+                    app:layout_constraintWidth_percent=".8" />
+
+                <EditText
+                    android:id="@+id/dprofileemail"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:ems="10"
+                    android:inputType="textPersonName"
+                    android:text="Email"
+                    android:textColor="@color/black"
+                    android:textSize="16sp"
+                    app:layout_constraintEnd_toEndOf="@+id/dprofilename"
+                    app:layout_constraintStart_toStartOf="@+id/dprofilename"
+                    app:layout_constraintTop_toBottomOf="@+id/dprofilename" />
+
+                <EditText
+                    android:id="@+id/dprofilephone"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:ems="10"
+                    android:inputType="textPersonName"
+                    android:text="Phone"
+                    android:textColor="@color/black"
+                    android:textSize="16sp"
+                    app:layout_constraintEnd_toEndOf="@+id/dprofileemail"
+                    app:layout_constraintStart_toStartOf="@+id/dprofileemail"
+                    app:layout_constraintTop_toBottomOf="@+id/dprofileemail" />
+
+                <EditText
+                    android:id="@+id/dprofilelocation"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:ems="10"
+                    android:inputType="textPersonName"
+                    android:text="Location"
+                    android:textColor="@color/black"
+                    android:textSize="16sp"
+                    app:layout_constraintEnd_toEndOf="@+id/dprofilephone"
+                    app:layout_constraintStart_toStartOf="@+id/dprofilephone"
+                    app:layout_constraintTop_toBottomOf="@+id/dprofilephone" />
+
+                <EditText
+                    android:id="@+id/dprofiledesc"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:ems="10"
+                    android:inputType="textPersonName"
+                    android:text="Name"
+                    android:textColor="@color/black"
+                    android:textSize="16sp"
+                    app:layout_constraintEnd_toEndOf="@+id/dprofilelocation"
+                    app:layout_constraintStart_toStartOf="@+id/dprofilelocation"
+                    app:layout_constraintTop_toBottomOf="@+id/dprofilelocation" />
+
+                <Button
+                    android:id="@+id/btnsave"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="24dp"
+                    android:background="@drawable/buttonbackground"
+                    android:text="Save"
+                    android:textSize="16sp"
+                    app:backgroundTint="@color/button_background"
+                    app:layout_constraintEnd_toEndOf="@+id/dprofiledesc"
+                    app:layout_constraintStart_toStartOf="@+id/dprofiledesc"
+                    app:layout_constraintTop_toBottomOf="@+id/dprofiledesc" />
+
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </androidx.cardview.widget.CardView>
     </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.core.widget.NestedScrollView>

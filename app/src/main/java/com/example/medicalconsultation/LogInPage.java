@@ -19,6 +19,7 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.RuntimeExecutionException;
 import com.google.android.gms.tasks.Task;
+import com.google.android.material.textfield.TextInputLayout;
 import com.google.firebase.FirebaseException;
 import com.google.firebase.FirebaseNetworkException;
 import com.google.firebase.auth.AuthResult;
@@ -45,7 +46,7 @@ public class LogInPage extends AppCompatActivity {
     FirebaseAuth fAuth;
     ProgressBar progressBar;
     private Button mButtonRegister,mButtonLogin;
-    private EditText mEtPassword,mEtUsername;
+    private TextInputLayout mEtPassword,mEtUsername;
     public Patient mUserPatientDetails;
     public String mUser;
     public Doctor mUserDoctorDetails;
@@ -63,7 +64,7 @@ public class LogInPage extends AppCompatActivity {
         mUser = myIntent.getStringExtra(APP_USER);
 
 
-        mButtonRegister = (Button)findViewById(R.id.button_register);
+       // mButtonRegister = (Button)findViewById(R.id.button_register);
         mButtonLogin = (Button)findViewById(R.id.buttonlogin);
         progressBar = findViewById(R.id.progressBar);
 
@@ -72,8 +73,8 @@ public class LogInPage extends AppCompatActivity {
         mEtPassword = findViewById(R.id.etPassword);
 
         mButtonLogin.setOnClickListener(v->{
-            String username = mEtUsername.getText().toString().trim();
-            String password = mEtPassword.getText().toString().trim();
+            String username = mEtUsername.getEditText().getText().toString().trim();
+            String password = mEtPassword.getEditText().getText().toString().trim();
             if(username.length() == 0){
                 mEtUsername.setError("Username is Required");
                 mEtUsername.requestFocus();
@@ -124,19 +125,19 @@ public class LogInPage extends AppCompatActivity {
 
         });
 
-        mButtonRegister.setOnClickListener(v -> {
-            if(mUser.equals(USER_PATIENT)){
-                Intent intent = new Intent(getApplicationContext(), PatientRegister.class);
-                startActivity(intent);
-                finish();
-            }else{
-                Intent intent = new Intent(getApplicationContext(), DoctorRegister.class);
-                startActivity(intent);
-
-            }
-
-
-        });
+//        mButtonRegister.setOnClickListener(v -> {
+//            if(mUser.equals(USER_PATIENT)){
+//                Intent intent = new Intent(getApplicationContext(), PatientRegister.class);
+//                startActivity(intent);
+//                finish();
+//            }else{
+//                Intent intent = new Intent(getApplicationContext(), DoctorRegister.class);
+//                startActivity(intent);
+//
+//            }
+//
+//
+//        });
 
     }
 

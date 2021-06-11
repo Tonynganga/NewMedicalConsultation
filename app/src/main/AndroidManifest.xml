@@ -10,22 +10,33 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.MedicalConsultation">
-        <activity android:name=".PostComments"></activity>
+        <activity android:name=".SplashActivity">
+
+        </activity>
+        <activity android:name=".PostComments" />
         <activity android:name=".CommentSection" />
         <activity android:name=".PatientProblem" />
-        <activity android:name=".DoctorsProfile"/>
-        <activity android:name=".PatientHomePage" />
-        <activity android:name=".DoctorHomePage" />
-        <activity android:name=".DoctorRegister" />
-        <activity android:name=".PatientRegister" />
-        <activity android:name=".LogInPage" />
-        <activity android:name=".MainActivity">
+        <activity android:name=".DoctorsProfile" />
+        <activity android:name=".PatientHomePage" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".DoctorHomePage" />
+        <activity android:name=".DoctorRegister" />
+        <activity android:name=".PatientRegister" />
+
+        <activity android:name=".LogInPage" >
+
+        </activity>
+        <activity android:name=".MainActivity">
+        </activity>
+
+        <meta-data
+            android:name="preloaded_fonts"
+            android:resource="@array/preloaded_fonts" />
     </application>
 
 </manifest>

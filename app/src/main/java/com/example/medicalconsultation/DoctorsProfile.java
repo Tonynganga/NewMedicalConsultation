@@ -178,11 +178,9 @@ public class DoctorsProfile extends AppCompatActivity {
                 fileRef.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
                     @Override
                     public void onSuccess(Uri uri) {
-//                        Model model = new Model(uri.toString());
                         mDocDetails.setImgUri(uri.toString());
                         FirebaseUtils.saveDoctorUser(mDocDetails);
                         String modelId = root.push().getKey();
-//                        root.child(modelId).setValue(model);
                         progressBar.setVisibility(View.INVISIBLE);
                         Toast.makeText(getApplicationContext(), "Uploaded Successful", Toast.LENGTH_LONG).show();
 

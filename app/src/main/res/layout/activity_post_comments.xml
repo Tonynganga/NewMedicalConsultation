@@ -6,62 +6,87 @@
     android:background="@color/background"
     android:layout_height="match_parent"
     tools:context=".PostComments">
-    <TextView
-        android:id="@+id/textView2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="50dp"
-        android:text="Post Comment"
-        android:textColor="@color/white"
-        android:textSize="30sp"
-        android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-    <EditText
-        android:id="@+id/etAddComment"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/space_btw_textV"
-        android:background="@drawable/input_outline"
-        android:ems="10"
-        android:hint="Add comment"
-        android:importantForAutofill="no"
-        android:inputType="text"
-        android:padding="15dp"
-        android:textColor="@color/white"
-        android:textColorHint="@color/white"
-        android:textSize="18sp"
-        android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tvDescForDoc"
-        app:layout_constraintWidth_percent=".8" />
-    <TextView
-        android:id="@+id/tvDescForDoc"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:text="TextView"
-        android:textColor="@color/white"
-        android:textSize="20sp"
-        android:layout_marginTop="@dimen/space_from_title"
-        android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView2"
-        app:layout_constraintWidth_percent=".8"/>
 
-    <Button
-        android:id="@+id/button2"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/space_btw_textV"
-        android:background="@drawable/buttonbackground"
-        android:text="post comment"
-        app:backgroundTint="@color/button_background"
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="350dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/etAddComment"
-        app:layout_constraintWidth_percent=".8" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:cardCornerRadius="15dp"
+        android:layout_marginTop="50dp"
+        android:layout_marginRight="20dp"
+        android:layout_marginLeft="20dp">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:id="@+id/textView2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="50dp"
+                android:fontFamily="@font/delius_swash_caps"
+                android:text="Post Comment"
+                android:textColor="@color/black"
+                android:textSize="30sp"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+            <EditText
+                android:id="@+id/etAddComment"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/space_btw_textV"
+                android:background="@drawable/input_outline"
+                android:ems="10"
+                android:hint="Add comment"
+                android:importantForAutofill="no"
+                android:inputType="text"
+                android:padding="15dp"
+                android:textColor="@color/white"
+                android:textColorHint="@color/black"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/tvDescForDoc"
+                app:layout_constraintWidth_percent=".8" />
+            <TextView
+                android:id="@+id/tvDescForDoc"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="TextView"
+                android:textColor="@color/black"
+                android:textSize="20sp"
+                android:layout_marginTop="@dimen/space_from_title"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textView2"
+                app:layout_constraintWidth_percent=".8"/>
+
+            <Button
+                android:id="@+id/button2"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/space_btw_textV"
+                android:background="@drawable/buttonbackground"
+                android:text="post comment"
+                android:textSize="16sp"
+                app:backgroundTint="@color/button_background"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/etAddComment"
+                app:layout_constraintWidth_percent=".8" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+    </androidx.cardview.widget.CardView>
+
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -3,6 +3,7 @@ package com.example.medicalconsultation;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 
@@ -16,6 +17,7 @@ import android.widget.ProgressBar;
 
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
+import android.widget.TextView;
 import android.widget.Toast;
 
 
@@ -23,6 +25,7 @@ import com.example.medicalconsultation.HelperClasses.Patient;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.android.material.textfield.TextInputLayout;
 import com.google.firebase.FirebaseException;
 import com.google.firebase.FirebaseNetworkException;
 import com.google.firebase.auth.AuthResult;
@@ -38,91 +41,102 @@ import static com.example.medicalconsultation.MainActivity.USER_PATIENT;
 public class PatientRegister extends AppCompatActivity {
     private static final String TAG = "PatientRegister";
     private FirebaseAuth mAuth;
-    private EditText edtname, edtemail, edtpassword,edtage, edtlocation;
+    private TextInputLayout edtname, edtemail, edtpassword,edtage, edtlocation, edtconfirmpassword;
     private RadioGroup gender;
     private RadioButton selectedRadioButton;
     private Button edtRegister, loginback;
+    TextView alreadyhaveanaccount;
+    ProgressDialog mLoadingBar;
 
-    //variables
-    EditText mEtName, mEtAge, mEtLocation, mEtEmail, mEtPassword;
-    RadioGroup radioGroup;
-    RadioButton genderRadioButton;
-    Button mBtnRegister;
-    ProgressBar progressBar;
-
-    FirebaseAuth fAuth;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_patient_register);
 
-        edtname = findViewById(R.id.etPatientName);
-        edtemail = findViewById(R.id.etPatientEmail);
-        edtpassword = findViewById(R.id.etPatientPassword);
-        edtage = findViewById(R.id.etPatientAge);
-        edtlocation = findViewById(R.id.etPatientLocation);
+        edtname = findViewById(R.id.tlpatient_name);
+        edtemail = findViewById(R.id.tlpatient_email);
+        edtage = findViewById(R.id.tlpatient_age);
+        edtlocation = findViewById(R.id.tlpatient_location);
+        edtpassword = findViewById(R.id.tlpatient_password);
+        edtconfirmpassword = findViewById(R.id.tlpatient_confirmpassword);
+        alreadyhaveanaccount = findViewById(R.id.alraedyhaveanaccount);
+
+        mLoadingBar = new ProgressDialog(this);
+        
 
         gender = findViewById(R.id.radioGroup);
-        edtRegister = findViewById(R.id.buttonRegister);
-        loginback = (Button)findViewById(R.id.buttonloginback);
+       edtRegister = findViewById(R.id.buttonRegister);
+        //loginback = (Button)findViewById(R.id.buttonloginback);
 
 
 
 
         mAuth = FirebaseAuth.getInstance();
 
+        alreadyhaveanaccount.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getApplicationContext(), LogInPage.class);
+                intent.putExtra(APP_USER,USER_PATIENT);
+                startActivity(intent);
+                finish();
+            }
+        });
+
         edtRegister.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                String patientname = edtname.getText().toString().trim();
-                String patientemail = edtemail.getText().toString().trim();
-                String patientpassword = edtpassword.getText().toString().trim();
-                String patientage = edtage.getText().toString().trim();
-                String patientlocation = edtlocation.getText().toString().trim();
+                String patientname = edtname.getEditText().getText().toString().trim();
+                String patientemail = edtemail.getEditText().getText().toString().trim();
+                String patientage = edtage.getEditText().getText().toString().trim();
+                String patientlocation = edtlocation.getEditText().getText().toString().trim();
+                String patientpassword = edtpassword.getEditText().getText().toString().trim();
+                String patientconfirmpassword = edtconfirmpassword.getEditText().getText().toString().trim();
                 String patientgender = ((RadioButton)findViewById(gender.getCheckedRadioButtonId())).getText().toString();
 
 
                 //validate values
                 if (patientname.isEmpty()) {
-                    edtname.setError("Full Name is required");
-                    edtname.requestFocus();
+                    setError(edtname, "Please Fill Out this Field");
                     return;
                 }
                 if (patientemail.isEmpty()) {
-                    edtemail.setError("Email is required");
-                    edtemail.requestFocus();
+                   setError(edtemail, "Please Fill Out this Field");
                     return;
                 }
                 if (!Patterns.EMAIL_ADDRESS.matcher(patientemail).matches()) {
-                    edtemail.setError("Please provide a valid email");
-                    edtemail.requestFocus();
+                    setError(edtemail,"Please provide a valid email");
                     return;
                 }
                 if (patientpassword.isEmpty()) {
-                    edtpassword.setError("Email is required");
+                    edtpassword.setError("Please Fill Out this Field");
                     edtpassword.requestFocus();
                     return;
                 }
 
                 if (patientpassword.length() < 6) {
-                    edtpassword.setError("The password length must be 6 characters long");
-                    edtpassword.requestFocus();
+                    setError(edtpassword,"The password length must be 6 characters long");
+                    return;
+                }
+                if (!patientconfirmpassword.matches(patientpassword)){
+                    setError(edtconfirmpassword, "Password Does Not Match");
                     return;
                 }
 
                 if (patientage.isEmpty()) {
-                    edtage.setError("Age is required");
-                    edtage.requestFocus();
+                    setError(edtage,"Please Fill Out this Field");
                     return;
                 }
                 if (patientlocation.isEmpty()) {
-                    edtlocation.setError("Age is required");
-                    edtlocation.requestFocus();
+                    setError(edtlocation,"Please Fill Out this Field");
                     return;
                 }
 
 
+                mLoadingBar.setTitle("SignUp");
+                mLoadingBar.setMessage("Creating User");
+                mLoadingBar.show();
                 Patient patientUser = new Patient(patientname,patientemail,patientlocation,patientgender,Integer.parseInt(patientage));
 
                 mAuth.createUserWithEmailAndPassword(patientemail,patientpassword)
@@ -130,25 +144,17 @@ public class PatientRegister extends AppCompatActivity {
                             @Override
                             public void onComplete(@NonNull Task<AuthResult> task) {
                                 if(task.isSuccessful()){
+                                    mLoadingBar.dismiss();
                                     Toast.makeText(PatientRegister.this, "Register Successfull", Toast.LENGTH_LONG).show();
 //
                                     FirebaseUtils.registerPatientUser(patientUser);
 
                                 } else {
+                                    mLoadingBar.dismiss();
                                     throwRegisterError(task);
 
                                 }
                         }
-                });
-
-                loginback.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        Intent intent = new Intent(getApplicationContext(), LogInPage.class);
-                        intent.putExtra(APP_USER,USER_PATIENT);
-                        startActivity(intent);
-                        finish();
-                    }
                 });
 
             }
@@ -158,6 +164,13 @@ public class PatientRegister extends AppCompatActivity {
 
 
     }
+
+    private void setError(TextInputLayout field, String text) {
+
+        field.setError(text);
+        field.requestFocus();
+    }
+
     private void throwRegisterError(@NonNull Task<AuthResult> task) {
         try {
             throw task.getException();
