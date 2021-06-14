@@ -12,13 +12,12 @@ public class Doctor implements Serializable {
     private String doctordescription;
     private String doctorphone;
 
-
     private String imgUri;
 
     public Doctor() {
     }
 
-    public Doctor(String doctorname, String doctoremail, String doctorlocation, String doctordescription, String doctorphone) {
+    public Doctor(String doctorname, String doctoremail, String doctorlocation, String doctordescription, String doctorphone, String imgUri) {
         this.doctorname = doctorname;
         this.doctoremail = doctoremail;
         this.doctorlocation = doctorlocation;

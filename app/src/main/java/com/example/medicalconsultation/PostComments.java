@@ -11,6 +11,7 @@ import android.widget.TextView;
 import com.example.medicalconsultation.HelperClasses.Comment;
 import com.example.medicalconsultation.HelperClasses.Doctor;
 import com.example.medicalconsultation.HelperClasses.PatientPost;
+import com.google.android.material.textfield.TextInputLayout;
 
 import static com.example.medicalconsultation.FirebaseUtils.mFirebaseAuth;
 import static com.example.medicalconsultation.HelperClasses.PatientPostAdapter.PROBLEM_DESCRIPTION;
@@ -18,12 +19,14 @@ import static com.example.medicalconsultation.HelperClasses.PatientPostAdapter.P
 
 public class PostComments extends AppCompatActivity {
 
-    private EditText mEtComment;
+    private TextInputLayout mEtComment;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_post_comments);
+
+
         Intent myIntent =getIntent();
         String description=myIntent.getStringExtra(PROBLEM_DESCRIPTION);
         String problemId=myIntent.getStringExtra(PROBLEM_ID);
@@ -32,7 +35,7 @@ public class PostComments extends AppCompatActivity {
         mEtComment = findViewById(R.id.etAddComment);
         Button mBtPostProb=findViewById(R.id.button2);
         mBtPostProb.setOnClickListener( view -> {
-            String comment = mEtComment.getText().toString().trim();
+            String comment = mEtComment.getEditText().getText().toString().trim();
             if(description.length() == 0){
                 mEtComment.setError("Enter a Description");
                 mEtComment.requestFocus();
@@ -44,7 +47,7 @@ public class PostComments extends AppCompatActivity {
             }
 
             FirebaseUtils.addComment(this,postComment,problemId);
-            mEtComment.setText("");
+            mEtComment.getEditText().setText("");
         });
     }
 

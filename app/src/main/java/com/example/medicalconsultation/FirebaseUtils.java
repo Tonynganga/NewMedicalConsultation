@@ -34,6 +34,7 @@ public class FirebaseUtils {
     public static final String DOCTOR_USERS = "doctorUsers";
     public static String sUserEmail;
     public static Doctor sUserDoctorDetails;
+    public static Patient sUserPatientDetails;
 
 
     // Create a new user with a first and last name
@@ -64,6 +65,10 @@ public class FirebaseUtils {
        sUserDoctorDetails=docDetails;
         return sUserDoctorDetails;
     }
+    public static Patient setPatientUser(Patient patDetails){
+        sUserPatientDetails=patDetails;
+        return sUserPatientDetails;
+    }
     public static void attachListener() {
         mFirebaseAuth.addAuthStateListener(mAuthStateListener);
     }
@@ -72,7 +77,7 @@ public class FirebaseUtils {
         mFirebaseAuth.removeAuthStateListener(mAuthStateListener);
     }
 
-    public static void saveDoctorUser(Doctor user){
+    public static void registerDoctorUser(Doctor user){
         if(user.getId()==null){
         mFireStore.collection(DOCTOR_USERS)
                 .add(user)

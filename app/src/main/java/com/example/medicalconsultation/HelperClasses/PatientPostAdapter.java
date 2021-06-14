@@ -2,6 +2,7 @@ package com.example.medicalconsultation.HelperClasses;
 
 import android.content.Context;
 import android.content.Intent;
+import android.text.format.DateUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -21,8 +22,13 @@ import com.google.firebase.firestore.DocumentChange;
 import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FirebaseFirestoreException;
 import com.google.firebase.firestore.QuerySnapshot;
+import com.squareup.picasso.Picasso;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+
+import de.hdodenhof.circleimageview.CircleImageView;
 
 import static com.example.medicalconsultation.FirebaseUtils.mFireStore;
 import static com.example.medicalconsultation.FirebaseUtils.mFirebaseAuth;
@@ -32,7 +38,7 @@ public class PatientPostAdapter extends RecyclerView.Adapter<PatientPostAdapter.
 
     public static final String PROBLEM_DESCRIPTION = "Problem Description";
     public static final String PROBLEM_ID = "Problem Id";
-    ;
+
     ArrayList<PatientPost> mPatientPosts;
     private final Context mContext;
     private final String mUser;
@@ -83,14 +89,18 @@ public class PatientPostAdapter extends RecyclerView.Adapter<PatientPostAdapter.
 
     public  class PatientsPostViewHolder extends RecyclerView.ViewHolder{
 
-        TextView title, desc;
+        TextView postname, postTime, title, desc;
         Button btn;
+        CircleImageView postUserProfileimage;
         public PatientsPostViewHolder(@NonNull View itemView) {
             super(itemView);
             //Hooks
             title = itemView.findViewById(R.id.postTitle);
             desc = itemView.findViewById(R.id.postDescription);
+            postname = itemView.findViewById(R.id.postUsername);
+            postTime = itemView.findViewById(R.id.postTime);
             btn=itemView.findViewById(R.id.btView);
+            postUserProfileimage = itemView.findViewById(R.id.postimageView);
         }
     }
     public void populateArrayForDoctor() {
@@ -135,8 +145,12 @@ public class PatientPostAdapter extends RecyclerView.Adapter<PatientPostAdapter.
     @Override
     public void onBindViewHolder(@NonNull PatientsPostViewHolder holder, int position) {
         PatientPost post = mPatientPosts.get(position);
+        String timeAgo = calculateTimeAgo(post.getDatePost());
+        holder.postname.setText(post.getPatientName());
+        holder.postTime.setText(timeAgo);
         holder.title.setText(post.getCategory());
         holder.desc.setText(post.getPatientProblem());
+        Picasso.get().load(post.getImageUrl()).into(holder.postUserProfileimage);
         if(!mUser.equals(USER_PATIENT)){
             holder.btn.setText("comment");
         }
@@ -154,7 +168,6 @@ public class PatientPostAdapter extends RecyclerView.Adapter<PatientPostAdapter.
                     Intent intent = new Intent(mContext.getApplicationContext(), PostComments.class);
                     intent.putExtra(PROBLEM_DESCRIPTION, post.getPatientProblem());
                     intent.putExtra(PROBLEM_ID,post.getId());
-
                     mContext.startActivity(intent);
                 }
             }
@@ -169,6 +182,21 @@ public class PatientPostAdapter extends RecyclerView.Adapter<PatientPostAdapter.
         else
             return 0;
 
+    }
+
+    private String calculateTimeAgo(String datePost) {
+        SimpleDateFormat sdf = new SimpleDateFormat("dd-M-yyyy hh:mm:ss");
+
+        try {
+            long time = sdf.parse(datePost).getTime();
+            long now = System.currentTimeMillis();
+            CharSequence ago =
+                    DateUtils.getRelativeTimeSpanString(time, now, DateUtils.MINUTE_IN_MILLIS);
+            return ago +"";
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        return "";
     }
 
 

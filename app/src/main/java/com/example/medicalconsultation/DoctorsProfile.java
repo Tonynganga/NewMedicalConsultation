@@ -4,24 +4,21 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.app.ProgressDialog;
 import android.content.ContentResolver;
 import android.content.Intent;
 import android.content.res.Resources;
-import android.media.MediaDrm;
 import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
 import android.webkit.MimeTypeMap;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.example.medicalconsultation.HelperClasses.Doctor;
-import com.example.medicalconsultation.HelperClasses.Model;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -29,8 +26,6 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.firestore.DocumentSnapshot;
-import com.google.firebase.firestore.EventListener;
-import com.google.firebase.firestore.FirebaseFirestoreException;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 import com.google.firebase.storage.FirebaseStorage;
@@ -38,13 +33,9 @@ import com.google.firebase.storage.OnProgressListener;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 
-import de.hdodenhof.circleimageview.CircleImageView;
-
 import static com.example.medicalconsultation.FirebaseUtils.DOCTOR_USERS;
 import static com.example.medicalconsultation.FirebaseUtils.mFireStore;
-import static com.example.medicalconsultation.FirebaseUtils.mFirebaseAuth;
 import static com.example.medicalconsultation.HelperClasses.CommentsAdapter.SEND_DOCTOR_ID;
-import static com.example.medicalconsultation.LogInPage.DOCTOR_DETAILS;
 
 
 public class DoctorsProfile extends AppCompatActivity {
@@ -57,11 +48,7 @@ public class DoctorsProfile extends AppCompatActivity {
     private final StorageReference reference = FirebaseStorage.getInstance().getReference();
     private Uri imageUri;
     public Doctor mDocDetails;
-    public TextView mTvDocName;
-    public TextView mTvDocEmail;
-    public TextView mTvDocPhoneNo;
-    public TextView mTvDocDesc;
-    public TextView mTvDocLoc;
+    public EditText mTvDocName, mTvDocEmail, mTvDocPhoneNo, mTvDocDesc, mTvDocLoc;
 
 
     @Override
@@ -70,21 +57,20 @@ public class DoctorsProfile extends AppCompatActivity {
         setContentView(R.layout.activity_doctors_profile);
         Intent myIntent = getIntent();
         String docId=myIntent.getStringExtra(SEND_DOCTOR_ID);
-        profileimage = findViewById(R.id.imageview1);
+        profileimage = findViewById(R.id.imageviewdprofile);
         btnupload = findViewById(R.id.buttonupload);
-        progressBar = findViewById(R.id.progressBarupload);
-        mTvDocName = findViewById(R.id.textViewDocName);
-        mTvDocEmail = findViewById(R.id.textViewDocEmail);
-        mTvDocPhoneNo = findViewById(R.id.textViewDocPhoneNo);
-        mTvDocDesc = findViewById(R.id.textViewDocDesc);
-        mTvDocLoc = findViewById(R.id.textViewDocLocation);
+        mTvDocName = findViewById(R.id.dprofilename);
+        mTvDocEmail = findViewById(R.id.dprofileemail);
+        mTvDocPhoneNo = findViewById(R.id.dprofilephone);
+        mTvDocDesc = findViewById(R.id.dprofiledesc);
+        mTvDocLoc = findViewById(R.id.dprofilelocation);
         getDoctor(docId);
 //        mDocDetails = (Doctor) myIntent.getSerializableExtra(DOCTOR_DETAILS);
 
 
 
 
-        progressBar.setVisibility(View.INVISIBLE);
+        //progressBar.setVisibility(View.INVISIBLE);
 
         profileimage.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -179,7 +165,7 @@ public class DoctorsProfile extends AppCompatActivity {
                     @Override
                     public void onSuccess(Uri uri) {
                         mDocDetails.setImgUri(uri.toString());
-                        FirebaseUtils.saveDoctorUser(mDocDetails);
+                        FirebaseUtils.registerDoctorUser(mDocDetails);
                         String modelId = root.push().getKey();
                         progressBar.setVisibility(View.INVISIBLE);
                         Toast.makeText(getApplicationContext(), "Uploaded Successful", Toast.LENGTH_LONG).show();

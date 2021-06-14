@@ -35,44 +35,50 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
-            <EditText
+
+            <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/etAddComment"
-                android:layout_width="0dp"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/space_btw_textV"
-                android:background="@drawable/input_outline"
-                android:ems="10"
-                android:hint="Add comment"
-                android:importantForAutofill="no"
-                android:inputType="text"
-                android:padding="15dp"
-                android:textColor="@color/white"
+                android:layout_marginStart="8dp"
+                android:layout_marginLeft="8dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="8dp"
+                android:layout_marginRight="8dp"
+                android:hint="Add Comment"
                 android:textColorHint="@color/black"
-                android:textSize="18sp"
-                android:textStyle="bold"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/tvDescForDoc"
-                app:layout_constraintWidth_percent=".8" />
+                app:layout_constraintTop_toBottomOf="@+id/tvDescForDoc">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="textPersonName"
+                    android:textColor="@color/black"
+                    android:textStyle="bold" />
+            </com.google.android.material.textfield.TextInputLayout>
+
             <TextView
                 android:id="@+id/tvDescForDoc"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="32dp"
                 android:text="TextView"
                 android:textColor="@color/black"
                 android:textSize="20sp"
-                android:layout_marginTop="@dimen/space_from_title"
                 android:textStyle="bold"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/textView2"
-                app:layout_constraintWidth_percent=".8"/>
+                app:layout_constraintWidth_percent=".8" />
 
             <Button
                 android:id="@+id/button2"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/space_btw_textV"
+                android:layout_marginTop="24dp"
                 android:background="@drawable/buttonbackground"
                 android:text="post comment"
                 android:textSize="16sp"

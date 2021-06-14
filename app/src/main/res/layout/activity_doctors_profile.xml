@@ -117,7 +117,7 @@
                     android:layout_marginTop="8dp"
                     android:ems="10"
                     android:inputType="textPersonName"
-                    android:text="Name"
+                    android:text="Description"
                     android:textColor="@color/black"
                     android:textSize="16sp"
                     app:layout_constraintEnd_toEndOf="@+id/dprofilelocation"

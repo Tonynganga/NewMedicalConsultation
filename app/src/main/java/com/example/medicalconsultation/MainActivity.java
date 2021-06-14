@@ -28,6 +28,7 @@ public class MainActivity extends AppCompatActivity {
 
         btnpatient = findViewById(R.id.buttonpatient);
         btndoctor = findViewById(R.id.buttondoctor);
+
         btnpatient.setOnClickListener(v -> {
             Intent intent = new Intent(getApplicationContext(), LogInPage.class);
             intent.putExtra(APP_USER,USER_PATIENT);
